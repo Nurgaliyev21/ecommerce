@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheet %}{% static 'store/css/store.css' %}{% endblock %}
+{% block title %}
+{% if product %}{{ product.title }}{% else %}Product{% endif %}
+{% endblock %}
+{% block attention %} {% endblock %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<div class="container">
+{% if messages %}
+<div class="alert alert-warning" alert-{{ message.tags }}" role="alert">
+{% for message in messages  %}
+  {{message|safe}} - <a href="{% url "account:wishlist" %}" class="alert-link">Your Wishlist</a>.
+{% endfor %}
+</div>
+{% endif %}
+  <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__left product__thumb nice-scroll">
+
+                            {% for image in product.product_image.all %}
+                                {% if image.is_feature %}
+
+                            <a class="pt active " href="#{{ image.image.url }}">
+                                <img class="img-fluid mx-auto d-block" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+                            </a>
+                                {% else %}
+                                    <a class="pt" href="#{{ image.image.url }}">
+                                        <img class="img-fluid mx-auto d-block" src="{{ image.image.url }}" alt="">
+                                    </a>
+                                {% endif %}
+                                {% endfor %}
+
+                        </div>
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                {% for image in product.product_image.all %}
+                                {% if image.is_feature %}
+
+                                        <img data-hash="{{ image.image.url }}" class="img-fluid" src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+                                {% else %}
+                                        <img data-hash="{{ image.image.url }}" class="img-fluid mx-auto d-block" src="{{ image.image.url }}" alt="">
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <h3>{{ product.title }}</h3>
+                        <div class="product__details__price">$ {{ product.regular_price }}</div>
+                        <div>
+                        {{ product.description }}
+                        </div>
+                        <div style="display: flex!important; align-items: center!important" class="product__details__button">
+                            <div class="quantity">
+                                    <label style="margin-top: 20px" for="select">Количество</label>
+                                        <select id="select" class="h6 store-select-dropdown">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                        </select>
+                            </div>
+                            <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Add to
+          basket</button>
+                                <a href="{% url "account:user_wishlist" product.id  %}" style="margin-left: 20px"><i class="fal fa-heart"></i></a>
+                        </div>
+                        <div class="product__details__widget">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+  <script>
+    $(document).on('click', '#add-button', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '{% url "basket:basket_add" %}',
+        data: {
+          productid: $('#add-button').val(),
+          productqty: $('#select option:selected').text(),
+          csrfmiddlewaretoken: "{{csrf_token}}",
+          action: 'post'
+        },
+        success: function (json) {
+          document.getElementById("basket-qty").innerHTML = json.qty
+        },
+        error: function (xhr, errmsg, err) {}
+      });
+    })
+  </script>
+
+  {% endblock %}
