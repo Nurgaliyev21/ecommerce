@@ -1,10 +1,11 @@
 {% extends "../sub_base.html" %}
 {% block title %}Users Wish List{% endblock %}
+{% block home_active %}{% endblock %}
 {% block attention %}{% endblock %}
 {% block sub_content %}
 <div class="col-12 mx-auto" style="margin: 50px 0">
-  <h1 class="h3">My Wishlist</h1>
-  <div>Manage your Wishlist</div>
+  <h1 class="h3">Избранное</h1>
+  <div>Следите за своими Избраными товарами</div>
   <hr />
 
   {% if wishlist %}
@@ -24,8 +25,8 @@
         <div class="card-body">
           <h5 class="card-title"><a href="{{ product.get_absolute_url }}">{{product.title}}</a></h5>
           <p class="card-text">{{product.description}}</p>
-          <p class="card-text"><small class="text-muted">{{product.regular_price}}</small></p>
-          <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'account:user_wishlist' product.id %}">Remove from Wishlist</a>
+          <p class="card-text"><small class="text-muted">${{product.regular_price}}</small></p>
+          <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'account:user_wishlist' product.id %}">Убрать с избранных</a>
         </div>
       </div>
     </div>
@@ -33,7 +34,7 @@
 
   {% endfor %}
   {% else %}
-  <p class="card-text">No products have been added to your wishlist yet</p>
+  <p class="card-text">У вас нет избранных товаров</p>
   {% endif %}
 
 

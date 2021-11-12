@@ -6,12 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro/4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+          integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="https://cdn.staticaly.com/gh/hung1001/font-awesome-pro/4cac1a6/css/all.css" rel="stylesheet"
+          type="text/css"/>
     <title>{% block title %}cafel.kz{% endblock %}</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
 
     <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/jquery-ui.min.css' %}">
@@ -23,104 +32,108 @@
 </head>
 
 <body>
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"><i class="fal fa-search"></i></span></li>
-            <li><a href="{% url "account:wishlist" %}"><span class="icon_heart_alt"><i class="fal fa-heart"></i></span>
-            </a></li>
-            <li><a href="{% url "basket:basket_summary" %}"><span class="icon_bag_alt"><i class="fal fa-shopping-bag"></i></span>
-                <div class="tip">
-                                    {% with total_qty=basket|length %}
-                                    <div id="basket-qty" class="basket-qty">
-                                      {% if total_qty > 0 %}
-                                      {{ total_qty }}
-                                      {% else %}
-                                      0
-                                      {% endif %}
-                                    </div>
-                                    {% endwith %}
-                                </div>
-            </a></li>
-        </ul>
-        <div class="offcanvas__logo">
-            <a href="/">cafel.kz</a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-        </div>
-    </div>
-
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a style="color: inherit; text-decoration: none; font-size: 20px; padding: 2px"  href="/">cafel.kz</a>
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="offcanvas__close">+</div>
+    <ul class="offcanvas__widget">
+        <li><span class="icon_search search-switch"><i class="fal fa-search"></i></span></li>
+        <li><a href="{% url "account:wishlist" %}"><span class="icon_heart_alt"><i class="fal fa-heart"></i></span>
+        </a></li>
+        <li><a href="{% url "basket:basket_summary" %}"><span class="icon_bag_alt"><i
+                class="fal fa-shopping-bag"></i></span>
+            <div class="tip">
+                {% with total_qty=basket|length %}
+                    <div id="basket-qty-mob" class="basket-qty">
+                        {% if total_qty > 0 %}
+                            {{ total_qty }}
+                        {% else %}
+                            0
+                        {% endif %}
                     </div>
+                {% endwith %}
+            </div>
+        </a></li>
+    </ul>
+    <div class="offcanvas__logo">
+        <a href="/">cafel.kz</a>
+    </div>
+    <div id="mobile-menu-wrap"></div>
+    <div class="offcanvas__auth">
+        <a href="#">Login</a>
+        <a href="#">Register</a>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2">
+                <div class="header__logo">
+                    <a style="color: inherit; text-decoration: none; font-size: 20px; padding: 2px"
+                       href="/">cafel.kz</a>
                 </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="/">Главная</a></li>
-                            <li><a href="{% url "catalogue:full_shop" %}"">Ассортимент</a></li>
-                            <li><a href="{% url "catalogue:full_shop" %}">Товары и услуги</a>
-                                <ul class="dropdown">
-                                    {% for c in categories %}
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <nav class="header__menu">
+                    <ul>
+                        <li {% block home_active %}class="active"{% endblock %} ><a href="/">Главная</a></li>
+                        <li {% block assortiment_active %}{% endblock %}><a href="{% url "catalogue:full_shop" %}"">Ассортимент</a></li>
+                        <li {% block tovary_active %}{% endblock %}><a href="{% url "catalogue:full_shop" %}">Товары и услуги</a>
+                            <ul class="dropdown">
+                                {% for c in categories %}
                                     <li {% if category.slug == c.slug %}class="selected" {% endif %}>
-                                      <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+                                        <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
                                     </li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            <li><a href="https://nurgaliyev21.github.io/cafel/" target="_blank">О нас</a></li>
-                            <li><a href="https://nurgaliyev21.github.io/cafel/#skills"  target="_blank">Контакты</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            {% if user.is_authenticated %}
-                                  <a style="font-size: 18px" href="{% url "account:dashboard" %}">{{ request.user.name }}</a>
-                            {% else %}
-                                <a href="{% url "account:login" %}">Login</a>
-                                <a href="#">Register</a>
-                            {% endif %}
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"><i class="fal fa-search"></i></span></li>
-                            <li><a href="{% url 'account:wishlist' %}"><span class="icon_heart_alt"><i class="fal fa-heart"></i></span>
-                            </a></li>
-                            <li><a href="{% url "basket:basket_summary" %}"><span class="icon_bag_alt"><i class="fal fa-shopping-bag"></i></span>
-{#                                <div class="tip">#}
-{#                                    {% with total_qty=basket|length %}#}
-{#                                    <div id="basket-qty" class="basket-qty">#}
-{#                                      {% if total_qty > 0 %}#}
-{#                                      {{ total_qty }}#}
-{#                                      {% else %}#}
-{#                                      0#}
-{#                                      {% endif %}#}
-{#                                    </div>#}
-{#                                    {% endwith %}#}
-{#                                </div>#}
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li {% block about_active %}{% endblock %}><a href="https://nurgaliyev21.github.io/cafel/" target="_blank">О нас</a></li>
+                        <li {% block contacts_active %}{% endblock %}><a href="https://nurgaliyev21.github.io/cafel/#skills" target="_blank">Контакты</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
+            <div class="col-lg-3">
+                <div class="header__right">
+                    <div class="header__right__auth">
+                        {% if user.is_authenticated %}
+                            <a style="font-size: 18px" href="{% url "account:dashboard" %}">{{ request.user.name }}</a>
+                        {% else %}
+                            <a href="{% url "account:login" %}">Login</a>
+                            <a href="#">Register</a>
+                        {% endif %}
+                    </div>
+                    <ul class="header__right__widget">
+                        <li><span class="icon_search search-switch"><i class="fal fa-search"></i></span></li>
+                        <li><a href="{% url 'account:wishlist' %}"><span class="icon_heart_alt"><i
+                                class="fal fa-heart"></i></span>
+                        </a></li>
+                        <li><a href="{% url "basket:basket_summary" %}"><span class="icon_bag_alt"><i
+                                class="fal fa-shopping-bag"></i></span>
+                            <div class="tip">
+                                {% with total_qty=basket|length %}
+                                    <div id="basket-qty" class="basket-qty">
+                                        {% if total_qty > 0 %}
+                                            {{ total_qty }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </div>
+                                {% endwith %}
+                            </div>
+                        </a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </header>
+        <div class="canvas__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
 {% block attention %}
     <section class="categories">
         <div class="container-fluid">
@@ -128,60 +141,61 @@
                 <div class="col-lg-6 p-0">
                     <div class="categories__item categories__large__item set-bg"
                          data-setbg="https://www.centura.ca/site/assets/files/59426/altamura_tile_8.-ambiance_teaser.jpg">
-                    <div class="categories__text">
-                        <h2>Керамогранит</h2>
-                        <p>Это один из самых выносливых отделочных материалов. Он используется как в жилых помещениях, так и в общественных зданиях и промышленных помещениях.</p>
-                        <a href="/shop/ceramo">Изучить ассортимент</a>
+                        <div class="categories__text">
+                            <h2>Керамогранит</h2>
+                            <p>Это один из самых выносливых отделочных материалов. Он используется как в жилых
+                                помещениях, так и в общественных зданиях и промышленных помещениях.</p>
+                            <a href="/shop/ceramo">Изучить ассортимент</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg"
-                             data-setbg="data:image/jpeg;base64,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">
-                            <div class="categories__text">
-                                <h4>Кафель</h4>
-                                <p>537 наименовании</p>
-                                <a href="/shop/cafel">Изучить ассортимент</a>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                            <div class="categories__item set-bg"
+                                 data-setbg="data:image/jpeg;base64,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">
+                                <div class="categories__text">
+                                    <h4>Кафель</h4>
+                                    <p>537 наименовании</p>
+                                    <a href="/shop/cafel">Изучить ассортимент</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg"
-                             data-setbg="https://www.ukflooringdirect.co.uk/images/ww2_Website_Images/Spectra_Pebble_Grey_Tile_Luxury_Click_Vinyl_Flooring_02.jpg">
-                            <div class="categories__text">
-                                <h4>Cersanit</h4>
-                                <p>273 наименовании</p>
-                                <a href="/shop/cersanit">Изучить ассортимент</a>
+                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                            <div class="categories__item set-bg"
+                                 data-setbg="https://www.ukflooringdirect.co.uk/images/ww2_Website_Images/Spectra_Pebble_Grey_Tile_Luxury_Click_Vinyl_Flooring_02.jpg">
+                                <div class="categories__text">
+                                    <h4>Cersanit</h4>
+                                    <p>273 наименовании</p>
+                                    <a href="/shop/cersanit">Изучить ассортимент</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg"
-                             data-setbg="https://salexy.kz/images/img_kz/474x354/db/16/db16e147e1acace761cebc8b40c7b4b2.jpg">
-                            <div class="categories__text">
-                                <h4>Клей для кафеля</h4>
-                                <p>5 наименовании</p>
-                                <a href="/shop/alinex">Изучить ассортимент</a>
+                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                            <div class="categories__item set-bg"
+                                 data-setbg="https://salexy.kz/images/img_kz/474x354/db/16/db16e147e1acace761cebc8b40c7b4b2.jpg">
+                                <div class="categories__text">
+                                    <h4>Клей для кафеля</h4>
+                                    <p>5 наименовании</p>
+                                    <a href="/shop/alinex">Изучить ассортимент</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg"
-                             data-setbg="data:image/jpeg;base64,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">
-                            <div class="categories__text">
-                                <h4>Ламинат</h4>
-                                <p>87 наименовании</p>
-                                <a href="/shop/laminat">Изучить ассортимент</a>
+                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                            <div class="categories__item set-bg"
+                                 data-setbg="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEhUREhAVFRUXFRUVFRYVFRUVFxUWFRUXFhUVFxYYHSggGBolGxYVITEhJSktLi4uFx8zODMsNygtLisBCgoKDg0OFQ8QFy0aFx03LTctKy0tLS0rLS0rNystLS0tLSstLSstLSsrKysrKysrKy0tKysrKy0tKysrKystLf/AABEIAL8BCAMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAQIDBAUGB//EADcQAAEDAgMGBAYBBAIDAQAAAAEAAhEDITFBUQQSYXGBkSIyofAFE7HB0eFiQoKS8VJyFKKyBv/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAcEQEBAQEBAQEBAQAAAAAAAAAAARECUQMxQRL/2gAMAwEAAhEDEQA/APp0IhNCAQhNAkJohAkJoQJCcIQJCaECQmhBFIhTSQOkFYAoUwrEAhNCBITQgSE0IBCEQgEk0IEhNCBQkmhAkJoQVQhNNBFOE0IFCITQgEIQgEIQgEIQgSE0IEkpIQOmFYo01NAkQmhAQhCEAhCEAiEIQCUJoQJEJoQRQpIhBGEJoQVIQhAIQmgSE0IEhNCBJoTQJCaECQmmgiiE0IHTVkKNNTQJEKSECSUkkCQmiECQmkgSE0IEhNCBIQhAIQhBUhCEAhEJoEhNCAQmhAk04RCBIUoThBGEQpIQRhIqaiUDpqxV01YEDQmEIEhNEIIoThCBJKSSBITQgihNEIEhNJAIQhBUhNCBJpwiECTThNBGE4TQgEJpIBCEIBCIUH1WjO+guUE1F0DEwoS84DdHG57I+S3E+I8fwgVOu3jGsWWlhBwMqFN4QaLTcWOosgtQq/GP5DsU21mm2B0NkE0JwkgEIQgEQmhBGEJoQRQpQkgSSklCBIThNBTCcJpoEiE0IBCEIBCEQgSFF9VozvoLlKXnAbvO57IJmBiVX86fKJ44DumKIxNzxTNQBBH5bj5ndG29VJoa3AQs9bagBJMLl7T8YaPLfibD8qXqT9WS12H1lg2n4i0ZzyXB2/4w1vmfvGJ3R6SsTfiT3GBTIzvmNZXK/Txuceu274xUB8NMEfyJHbP0XS2X4uw4y06Ow7rzdJlRxBvYyRJgnIcl0KezTcrM7q3mPTsrKZh2IlebD/lf17v8Ref7futFD4yJhwjiIPduXcrrPpKxea7XyiPK7obhP5pHmbHEXCoobU1wsQffotDai2yk0g4FNQNJpuLHUJeMfyHYoLEKDaoPA6GynCAQhCAQhCBIhNCCMIUkkFaEIhAIThQfUaOegQSQSBioS84DdHG5QKQxNzxQL5s+UE8cAj5ZPmd0FlIvCorbU1oJJAAxJIAHMlBe0NbgIUH1lx63xtkkM8R4WHdc2vt9R/8AVA0Fh1zWL3I1ObXfrba0Z30FyuftHxHQgep/C42844mBoL/X8KxjDgB3uVzvdrc4kLbNqJ1nuVkdTnE48466rqs2PX1U3bG0CSQBmTYLDbl0adNuce8grdi2inV8h3uhUqlWj5WN3zxs0c8/RVMqbw8QgZBvhBvpmOaDpHaabMTJ0bc98Puslf4k84eEcLnA4u9beqp3cRj2GHLFMUYFzw6bpH1JKamINJnvJi9gDJnzYga3V1KjUdja0EEy2cyJyyVtGo0mIJxwwEkn7+gW3dTFU0qO7nBAAEEyAOK6FHbntxg+h7rI4gXJAGpMLJV20GzBPE2HbP0Vls/Es16Sht7TnB0NltZVXiN0u8xnhl0GH3W7Zdoqss1xjR1x+ui3Pr6xePHqzBxCj8sjynobhczZ/iM+YRxFx+VvpbQDgZXWWX8YssW/NjzCOIuFNpBwKTXhRNMZWPCyqJwhQ8Q/kOxTbUB4HQoJIThCBIQhBWYGJVfzZ8onjgExSGJueKZegj8snzO6BSaAMBCqfWWSrtgyv71Utk/TG51ULNW2oDPp+lidVcc+g/KpcQFzv08bnHo2/bqoHgZPHEj+0fvkuI95ed57i6DmbD+3ALru2gDBZapFQ4eLUQD3z5Fc71a6SSMs3sP98tFOjsZMzmZOqvZWDLO7gRfkbnpPJOp8QpjynekZYd8FBbT2QDJW1HtZ5nAcBc9hkuadtqE4QNBItMHxY8bRgVRQaQCCbEyJue+Z4qjU/wCKl0/LbEGN597jIDXvyWJzXOO88l544DkMAOUK9oaMG9/wrAScFBQKUcOH3Ut3qtLdnOadRgGf6TDVTTooPpP1aTxBP3WbaK7gRugk3FotxKY+Y7G3K/qcPd0VsNZrBDnCeAieQF1Bu2uI8DYGp+w98llGzDGL9+610qeoU0xQ6mXGXEuOpynh9gtdPZ1opsaPwrJQVspQrWgaT9EnQc1VU2sM8xHDOemaqNIcFTW2wMEggHK8TwAxPZYa+1F38Rq6J7YD1VFNzb+MA5l0knqSFR2dm+OmfE2RrYO/xwPccl19k+Isf5XX0wPYrx84eWeZLTzBTfvYQOhH4stzuxm8R7xtVSMHFeO2X4jWp2Lt8aOuejsfquxsnxpjvNLD/LDv+YXSdysXmx19wjynocE/mx5hHEXCrZWBVoetMpNIOBQoGmOXJCDFV2kDNZam1HL1/Czk9/eapqbQBmuN+l/jpOPV7yTiZ96KD6gF1jftR1AWV20A8eLsOmq5/reNlXbNFQ6q42Hv32WSpXMwASfXoNOJVuyOe4Whg4CXE8zb0KDUGgC5A4k5++KocxuQ6ugZZAifopNp3kHqb25lDoUVkGyg+aCeRgchh3VgohuAWrdnJOnR0VkRkDHaQp06BW1tPVWEgX9SYjqqM7Nn1VgAGCorbYTZrS7jg3nx93UBT3vO6eAsPfOU0xJ9ckw2/LD/AC15SVTU2d+LpI/jPrmei1NIbhH1KhUqk5qCujs4jwxHCIV/yAMVldTBvhxBg/vqrG7W5og34gX6jDt2UxVwpaoLdB2UqFRrrgzrw5jLqpVtqa3noLn9c8FcTRuEYqFR7W4nlmT0WOrtjjYHd5GXd4IHRZyOBOpIJ/yz6q4NNbazgBHLxO9LD1WSo9zTO7iccT+fVRNaIseRbI6Eq0NOgiPLGenCEGd4Lv6RzuOt7qbZGBvnA+5uVMUdcNBF+J/CsbSsgrdVdEbx4qVN3H8qRpQJNhqT7hVuqgeXuZ9G4nBQTc844DU26Ks1naQNT9h+Y6odAu4kmeE8mjL0RLiZiNBMwMzEXPFTVxdsm1Ppus92pzB4RhPvl2dm/wD0IFqjY4tv1IyXC+XOLieVh6K1mzzbd7j14qzqxLzK9ls22seJa4Hl9xkheYoUQLixGlj6IXWfT2Mf4V19v0P3i05LGK5MEm5vytrqqaVFz7SG8XXPG3K14xWs7K0X855ycrhpEe8VzbUmo5xho3h6Drn7wSdLCAQZM8vQz+VsNN2+CC6ALibOOkfdW09mvvHE+g0QV0TDYgNJx3RETj1xU25CLZDL9q0UAmBwUE2tGarLdFdue/yoVdop08SJ9T0QJtIq7fa3ExlpP5WJ22vdZgga2n8D1UQQLm57nlPsK6NVTaibMbHF0/8AyL94WeqybucXOxE5Hg0GFFzyeAVTyEFTvmONhAtc4myu8QxPX3gqtoqWxhYTtc2JjH0UHXaeqHvjgvPMPyzO86CLNknqB/tam7Q5x8JJE5cIxOWenIoNteqRgJ1uLcSs7Xl2DTyxPWTDeqmxkAA2AybMa3PPIQrm2FojSB9EEBSdYkxGmP8AkP0n4RxxOsxnGvVSc8C9stMDmDgqn1hgRvETuk2Ma8AqHvg7sOiciLcrflRayTBM5TA11xhLZ6WptGOfsrWG6D3rx98kFdPZwLknl9/f2VzQZsMExTzJ/CfzxgwTx/p/ettMVNEgzM98gs9faoHgYXHXAcxr7uk9jiZdfgTEch91GtGn3MqKzCo5xBdc9wOQy543TfTm28YnLPtHvNWFhPu/uU6dFxgDJQQFINMhs/bqtVHZycbcFq2bZir5AVwV0tnAxV/hCy7RXDRM8hr+Vlc1zruO4Om9+G/XkqjdV2hrbC5yGJPT7oXNJizBzN5PMnEoTRrqbLewHXL8ngtFHYRjf6egwWqkwDiUjVKoj8sBRIUrc1h2n4oxp3Wgvdk1l8NX+UIjWG5qFTaGiwuRk25n6DrCyUzVfd8NH/Fs/wDs/F3SArQYsMOwHIKKp2irVdZtgbWMu7/rqoN2eLkXzznmTitLnaqp9XRAXzSJhVmssdTapwQaK9cBZP8AyiTAy79lD53Dr/tNlNz7tn/tJaO8QekoKd5zpBgkX/qB4ZKLKRd5WyNTaDFw4nH6rcdmaPMd44RAA7Z9ewUi/wDAjp+veIZ6Hw5lnPJcYwkhuGebra9l0BTbFiABaBAWPaX7kTJ1tPRIMEY34gKizaNqp0gSSIGZ8oURtAfbAnhNhxnjnqo/+Ic4I6WW2hskC3D0+n7UVTubxiww5GLgEZXmCDqrKdKb38ox5yOsWV9HZThHXL3YdlNpFwwb3HBoPF34lVCbTiwVQqf8RvccGxrIx6aLQ7ZA4eMk8B4Wjpn1lV1AWi4kTMiAToCMxyjks6uJNoE+e86jwjju/mVeKjQIaDbj31VQexwneB+3Obj0UHVZs0IK6jieCptjHdXfJdpJ4K2nsV5qYDBuXXX6fVMFVEF2AW+lTDcYJVFfaGt8tv1xVLPiG9doHO4H75DuFUb3Oi5gDtA46BZ31ScBA/5OBv8A9W4nmY6rMXmb3OU5cQ3AXzN+KsptJI3jzm/TmqGWgGbudnmY+g5WTGzyZcCOE37LWIyAHvVZdo2xjcTfIC5J5KC+mxoFgB0Quf8AOq1MPAO7vxKEHWqOAEmwzJMALHtG3gNJa2QBjgOgxPRRbsxN3neOpM9hkrGiMFRjpmpVaHG7DcC7R/jj3lX06e7aL+n7KuZqqKz7wEFjnjO/0VT62irufclQc7dxaTjpkgmSqX1I/wBqNd3Ej3h9VmpsfVJDYiYc44coxPKwQU1q7nWgRqCY7kKez7I5wtMauNu8X5hdGnsDG3J3iMyLDk3AJvrZg54/hBClsTG+bxHjh2z6qb60lVVKkY4nDhzjDopspTf3fQfkoKqhHXLBQeyRmDlgL9VtZQA9/dT3YTTHPdRc6A4A9weeK00tnbAlrbHTFWlwUBtEnda2XRPTWTgPVQaaVNoyvw+il85v9PiOFrNHN2HQSeCzmk53md/aLDrm76cFfS2cjOPsik6m53mNv+IsOoxd17LQIb0UXs3RcrM6tP2UFtSrp6ql3Eyol6i1wQJ9EHgciLHuFOkXNx8Q4QHfg+invQqataOpAGpJwQdCjXafKcMQZB6g3CzbVtgHhF3aDLmclkqiPPYi4Amerh0sO5UabovhpAGmAjmFUQrUKjzLnCMd0Ycjqq9u2J9QGHwYgYkDjC3UqTnW/wBLWaDGAudgLk6dAqONslB9JoaJdHX0Vj6rmwXmMLE/hWbRt73Q2i0AnAmJwJmMAO54Key/CmzvvcXuzJJieAyQUHaatTwtnotOy/CQ3xONzrf9Lp0ixogCI0Gior7UGjeJgCbwTzsiH4QIkaJLFWqOImN0RbAuPG1m/XkhFf/Z">
+                                <div class="categories__text">
+                                    <h4>Ламинат</h4>
+                                    <p>87 наименовании</p>
+                                    <a href="/shop/laminat">Изучить ассортимент</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
 {% block content %}
 
@@ -227,15 +241,13 @@
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.html">cafel.kz</a>
+                        <a href="/">cafel.kz</a>
                     </div>
                     <p>мкр.Аксай 4 дом 111 ТЦ "Аксай"., Алматы, Казахстан</p>
-                    <div class="footer__payment">
-                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                    <div class="footer__payment" style="font-size: 36px">
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-visa"></i>
                     </div>
                 </div>
             </div>
@@ -243,8 +255,8 @@
                 <div class="footer__widget">
                     <h6>Ссылки</h6>
                     <ul>
-                        <li><a href="<a href="https://nurgaliyev21.github.io/cafel/"">О нас</a></li>
-                        <li><a href="https://nurgaliyev21.github.io/cafel/#skills"  target="_blank"</li>
+                        <li><a href="https://nurgaliyev21.github.io/cafel/" target="_blank">О нас</a></li>
+                        <li><a href="https://nurgaliyev21.github.io/cafel/#skills" target="_blank"</li>
                         <li><a href="/shop/ceramo">Кафель</a></li>
                         <li><a href="/shop/cafel">Керамогранит</a></li>
                     </ul>
@@ -269,11 +281,11 @@
                         <button type="submit" class="site-btn">Подпишись</button>
                     </form>
                     <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
                     </div>
                 </div>
             </div>
@@ -291,8 +303,9 @@
 <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
+        <form class="search-model-form" method=POST action="{% url 'catalogue:search_results' %}">
+            {% csrf_token %}
+            <input type="text" id="search-input" name="searched" placeholder="Search here.....">
         </form>
     </div>
 </div>
@@ -306,6 +319,41 @@
 <script src="{% static 'core/js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'core/js/jquery.nicescroll.min.js' %}"></script>
 <script src="{% static 'core/js/main.js' %}"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq2hP7Uwqcb-5ak1Mtckhdq0CAUuh0jIM&callback=goMap"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        grabCursor: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            "@0.00": {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            },
+            "@0.75": {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            "@1.00": {
+                slidesPerView: 3,
+                spaceBetween: 40,
+            },
+            "@1.50": {
+                slidesPerView: 4,
+                spaceBetween: 50,
+            },
+        },
+    });
+</script>
 
 </body>
-

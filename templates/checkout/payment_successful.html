@@ -1,18 +1,20 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block title %}Payment Successful{%endblock %}
+{% block title %}Оплата прошла успешно{%endblock %}
+{% block home_active %}{% endblock %}
+{% block attention %}{% endblock %}
 {% block content %}
 
-<div class="container">
+<div class="container" style="margin-top: 50px">
   <div class="col-12">
-    <h1 class="h2">Payment Successful</h1>
+    <h1 class="h2">Оплата прошла успешно!</h1>
   </div>
   <div class="col-12">
-    <p>Order Summary</p>
+    <p>Ваши заказы</p>
   </div>
   <hr />
   <div class="col-12">
-    <p>View all <a href="{% url 'account:user_orders'%}">orders</a></p>
+    <p>Посмотрите свои <a href="{% url 'account:user_orders'%}">заказы</a></p>
   </div>
 </div>
 
