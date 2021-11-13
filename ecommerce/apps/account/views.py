@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse, HttpResponseRedirect
@@ -71,24 +71,17 @@ def account_register(request):
     if request.method == "POST":
         registerForm = RegistrationForm(request.POST)
         if registerForm.is_valid():
-            user = registerForm.save(commit=False)
+            user = registerForm.save()
+            user.user_name = registerForm.cleaned_data["user_name"]
             user.email = registerForm.cleaned_data["email"]
             user.set_password(registerForm.cleaned_data["password"])
-            user.is_active = False
+            user.is_active = True
             user.save()
-            current_site = get_current_site(request)
-            subject = "Activate your Account"
-            message = render_to_string(
-                "account/registration/account_activation_email.html",
-                {
-                    "user": user,
-                    "domain": current_site.domain,
-                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "token": account_activation_token.make_token(user),
-                },
-            )
-            user.email_user(subject=subject, message=message)
-            return render(request, "account/registration/register_email_confirm.html", {"form": registerForm})
+            new_user = authenticate(username=registerForm.cleaned_data['email'],
+                                    password=registerForm.cleaned_data['password'],
+                                    )
+            login(request, new_user)
+            return render(request, "account/dashboard/dashboard.html")
         else:
             return HttpResponse("Error handler content", status=400)
     else:
@@ -96,13 +89,13 @@ def account_register(request):
     return render(request, "account/registration/register.html", {"form": registerForm})
 
 
-def account_activate(request, uidb64, token):
+def account_activate(request, uidb64,):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = Customer.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, user.DoesNotExist):
         user = None
-    if user is not None and account_activation_token.check_token(user, token):
+    if user is not None:
         user.is_active = True
         user.save()
         login(request, user)

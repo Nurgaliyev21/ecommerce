@@ -63,8 +63,12 @@
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
+        {% if user.is_authenticated %}
+            <a style="font-size: 18px" href="{% url "account:dashboard" %}">Мой аккаунт</a>
+        {% else %}
+            <a href="{% url "account:login" %}">Login</a>
+            <a href="{% url "account:register" %}">Register</a>
+        {% endif %}
     </div>
 </div>
 
@@ -80,9 +84,11 @@
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li {% block home_active %}class="active"{% endblock %} ><a href="/">Главная</a></li>
-                        <li {% block assortiment_active %}{% endblock %}><a href="{% url "catalogue:full_shop" %}"">Ассортимент</a></li>
-                        <li {% block tovary_active %}{% endblock %}><a href="{% url "catalogue:full_shop" %}">Товары и услуги</a>
+                        <li {% block home_active %}class="active"{% endblock %}><a href="/">Главная</a></li>
+                        <li {% block assortiment_active %}{% endblock %}><a href="{% url "catalogue:full_shop" %}"">Ассортимент</a>
+                        </li>
+                        <li {% block tovary_active %}{% endblock %}><a href="{% url "catalogue:full_shop" %}">Товары и
+                            услуги</a>
                             <ul class="dropdown">
                                 {% for c in categories %}
                                     <li {% if category.slug == c.slug %}class="selected" {% endif %}>
@@ -91,8 +97,10 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li {% block about_active %}{% endblock %}><a href="https://nurgaliyev21.github.io/cafel/" target="_blank">О нас</a></li>
-                        <li {% block contacts_active %}{% endblock %}><a href="https://nurgaliyev21.github.io/cafel/#skills" target="_blank">Контакты</a></li>
+                        <li {% block about_active %}{% endblock %}><a href="https://nurgaliyev21.github.io/cafel/"
+                                                                      target="_blank">О нас</a></li>
+                        <li {% block contacts_active %}{% endblock %}><a
+                                href="https://nurgaliyev21.github.io/cafel/#skills" target="_blank">Контакты</a></li>
                     </ul>
                 </nav>
             </div>
@@ -100,10 +108,10 @@
                 <div class="header__right">
                     <div class="header__right__auth">
                         {% if user.is_authenticated %}
-                            <a style="font-size: 18px" href="{% url "account:dashboard" %}">{{ request.user.name }}</a>
+                            <a style="font-size: 18px" href="{% url "account:dashboard" %}">Мой аккаунт</a>
                         {% else %}
                             <a href="{% url "account:login" %}">Login</a>
-                            <a href="#">Register</a>
+                            <a href="{% url "account:register" %}">Register</a>
                         {% endif %}
                     </div>
                     <ul class="header__right__widget">

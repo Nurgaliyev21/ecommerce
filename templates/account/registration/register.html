@@ -1,8 +1,10 @@
 {% extends "../sub_base.html" %}
-{% block title %}Register Account{% endblock %}
+{% block title %}Зарегестрировать аккаунт{% endblock %}
+{% block home__active %}{% endblock %}
+{% block attention %}{% endblock %}
 {% block sub_content %}
 
-<form class="account-form" action="." method="post">
+<form class="account-form" action="." method="post" style="margin-top: 50px">
   {% csrf_token %}
   <h3 class="mb-2">Create an account</h3>
   <p class="mb-4">It's free and only takes a minute.</p>
