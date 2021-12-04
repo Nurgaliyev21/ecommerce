@@ -454,7 +454,7 @@ ol {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background: #ca1515;
+    background: #0b0b0b;
     content: "";
     -webkit-transition: all, 0.5s;
     -o-transition: all, 0.5s;
@@ -1153,7 +1153,7 @@ ol {
     bottom: 0;
     height: 2px;
     width: 100%;
-    background: #ca1515;
+    background: #0b0b0b;
     content: "";
 }
 
@@ -1236,7 +1236,7 @@ ol {
 }
 
 .product__item__pic .label.new {
-    background: #36a300;
+    background: #0b0b0b;
 }
 
 .product__item__pic .label.stockout {
@@ -1817,7 +1817,9 @@ ol {
     overflow: hidden;
     display: inline-block;
 }
-
+.swiper-button-prev, .swiper-button-next {
+    color: #0b0b0b;
+}
 .pro-qty .qtybtn {
     font-size: 14px;
     color: #666666;

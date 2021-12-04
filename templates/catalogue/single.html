@@ -18,7 +18,7 @@
   <section class="product-details spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
 
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="product__details__text">
                         <h3>{{ product.title }}</h3>
                         <div class="product__details__price">$ {{ product.regular_price }}</div>
@@ -59,34 +59,20 @@
                         </div>
                         <div class="product__details__button">
                             <div class="quantity">
-                                <span>Quantity:</span>
+                                <span>Количество:</span>
                                 <div class="pro-qty">
                                     <input id="select" type="text" value="1">
                                 </div>
                             </div>
                             <a id="add-button" class="cart-btn"><span class="icon_bag_alt">
                                 <i class="fal fa-shopping-bag"></i>
-                            </span> Add to cart</a>
+                            </span> В корзину</a>
                             <ul>
                                 <li><a href="{% url "account:user_wishlist" product.id  %}"><span class="icon_heart_alt">
                                     <i class="fal fa-heart"></i>
                                 </span></a></li>
                             </ul>
                         </div>
-{#                        <div style="display: flex!important; align-items: center!important" class="product__details__button">#}
-{#                            <div class="quantity">#}
-{#                                    <label style="margin-top: 20px" for="select">Количество</label>#}
-{#                                        <select id="select" class="h6 store-select-dropdown">#}
-{#                                          <option value="1">1</option>#}
-{#                                          <option value="2">2</option>#}
-{#                                          <option value="3">3</option>#}
-{#                                          <option value="4">4</option>#}
-{#                                        </select>#}
-{#                            </div>#}
-{#                            <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Add to#}
-{#          basket</button>#}
-{#                                <a href="{% url "account:user_wishlist" product.id  %}" style="margin-left: 20px"><i class="fal fa-heart"></i></a>#}
-{#                        </div>#}
                         <div class="product__details__widget">
                         </div>
                     </div>
